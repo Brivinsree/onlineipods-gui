@@ -31,6 +31,7 @@ const CalculateIpods = () => {
             const calculateCostDetails = await ipodservice.calculateIpodMinCost({ country_name: selectedCountry, no_of_units: parseInt(noofUnits) });
             setErrors("");
             if (calculateCostDetails && calculateCostDetails?.status) {
+                setIpodStockErr("");
                 setIpodCostDetails(calculateCostDetails.calculate_result);
             }
             if (calculateCostDetails && calculateCostDetails?.response?.data) {
