@@ -9,7 +9,9 @@ const CalculateIpods = () => {
     const [selectedCountry, setSelectedCountry] = useState("");
     const [noofUnits, setNoOfUnits] = useState(0);
     const [ipodCostDetails, setIpodCostDetails] = useState({});
+    const [ipodStockErr, setIpodStockErr] = useState("");
     const [errors, setErrors] = useState("");
+
 
     const ipodservice = new IpodService();
     const handleSelectChange = (event) => {
@@ -28,10 +30,13 @@ const CalculateIpods = () => {
         } else {
             const calculateCostDetails = await ipodservice.calculateIpodMinCost({ country_name: selectedCountry, no_of_units: parseInt(noofUnits) });
             setErrors("");
-            if (!!calculateCostDetails && calculateCostDetails.status) {
+            if (calculateCostDetails && calculateCostDetails?.status) {
                 setIpodCostDetails(calculateCostDetails.calculate_result);
             }
+            if (calculateCostDetails && calculateCostDetails?.response?.data) {
+                setIpodStockErr(calculateCostDetails?.response?.data);
 
+            }
         }
 
     }
@@ -43,7 +48,6 @@ const CalculateIpods = () => {
 
         }
     }, [country_details]);
-
 
     return (
         <>
@@ -77,6 +81,7 @@ const CalculateIpods = () => {
                     <button type="submit" className="form-button">Calculate</button>
 
                 </div>
+
             </form>
             <br />
             {ipodCostDetails?.calculateMinCost && (
@@ -87,6 +92,10 @@ const CalculateIpods = () => {
 
                 </div >
             )}
+            {ipodStockErr && (
+                <span className={smartpodStyle.errorMsg}>{ipodStockErr?.message}</span>
+            )}
+
         </>
     )
 
