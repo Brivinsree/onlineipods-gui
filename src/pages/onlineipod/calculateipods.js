@@ -66,7 +66,7 @@ const CalculateIpods = () => {
                 <br />
                 <div className="form-group">
                     <label className="form-label">No of Units:</label>
-                    <input type='text' name="no_of_units" value={noofUnits} onChange={handleChange} />
+                    <input type='number' name="no_of_units" value={noofUnits} onChange={handleChange} />
                     <br />
                     {errors && <span className={smartpodStyle.errorMsg}>{errors}</span>}
 

@@ -1,6 +1,7 @@
 export const API_ENDPOINTS = {
     //User
     CALCULATE_IPOD_COST: "api/v1/ipod/calculate/cost",
+    GENERATE_PARANTHESES: "api/v1/print/combinations"
 
 }
 
